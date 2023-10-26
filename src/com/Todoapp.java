@@ -1,70 +1,14 @@
 package com;
 
+import com.TodoItem;
+import com.TodoList;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-class TodoItem {
-    private String description;
-    private String dueDate;
-    private boolean isDone;
 
-    public TodoItem(String description, String dueDate) {
-        this.description = description;
-        this.dueDate = dueDate;
-        this.isDone = false;
-    }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return "Description: " + description + " | Due Date: " + dueDate + " | Done: " + isDone;
-    }
-}
-
-class TodoList {
-    List<TodoItem> items;
-
-    public TodoList() {
-        items = new ArrayList<>();
-    }
-
-    public void addItem(TodoItem item) {
-        items.add(item);
-    }
-
-    public void displayItems() {
-        for (int i = 0; i < items.size(); i++) {
-            System.out.println("Item " + (i + 1) + ": " + items.get(i));
-        }
-    }
-
-    public void removeItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            items.remove(index);
-            System.out.println("Item removed.");
-        } else {
-            System.out.println("Invalid item index.");
-        }
-    }
-}
-
-public class Todoapp {
+public class TodoApp {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TodoList todoList = new TodoList();
@@ -111,7 +55,7 @@ public class Todoapp {
                 case 5:
                     System.exit(0);
                 default:
-                    System.out.println("Invalid option. Please try againsssssssssssssssssssssssssssssssssssssssssssssssssssss.");
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
