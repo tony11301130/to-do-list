@@ -16,7 +16,7 @@ public class TodoUI {
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("To-Do List App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(800, 300);
 
         JPanel panel = new JPanel();
         frame.add(panel);
@@ -29,6 +29,8 @@ public class TodoUI {
         JButton addButton = new JButton("Add");
         JButton deleteButton = new JButton("Delete Selected");
         JButton completeButton = new JButton("Mark as Completed");
+        JButton moveUpButton = new JButton("Move Up");
+        JButton moveDownButton = new JButton("Move Down");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -64,11 +66,39 @@ public class TodoUI {
             }
         });
 
+        moveUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = todoList.getSelectedIndex();
+                if (selectedIndex > 0) {
+                    TodoItem selectedTodo = todoListModel.get(selectedIndex);
+                    todoListModel.remove(selectedIndex);
+                    todoListModel.add(selectedIndex - 1, selectedTodo);
+                    todoList.setSelectedIndex(selectedIndex - 1);
+                }
+            }
+        });
+
+        moveDownButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = todoList.getSelectedIndex();
+                if (selectedIndex >= 0 && selectedIndex < todoListModel.getSize() - 1) {
+                    TodoItem selectedTodo = todoListModel.get(selectedIndex);
+                    todoListModel.remove(selectedIndex);
+                    todoListModel.add(selectedIndex + 1, selectedTodo);
+                    todoList.setSelectedIndex(selectedIndex + 1);
+                }
+            }
+        });
+
         panel.add(newItemField);
         panel.add(addButton);
         panel.add(todoList);
         panel.add(deleteButton);
         panel.add(completeButton);
+        panel.add(moveUpButton);
+        panel.add(moveDownButton);
 
         frame.setVisible(true);
     }
