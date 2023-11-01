@@ -16,10 +16,10 @@ public class TodoUI {
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("To-Do List App");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 300);
 
         JPanel panel = new JPanel();
-        frame.add(panel);
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
         DefaultListModel<TodoItem> todoListModel = new DefaultListModel<>();
         JList<TodoItem> todoList = new JList<>(todoListModel);
@@ -27,10 +27,50 @@ public class TodoUI {
 
         JTextField newItemField = new JTextField(20);
         JButton addButton = new JButton("Add");
-        JButton deleteButton = new JButton("Delete Selected");
+        JButton deleteButton = new JButton("Delete");
         JButton completeButton = new JButton("Mark as Completed");
-        JButton moveUpButton = new JButton("Move Up");
-        JButton moveDownButton = new JButton("Move Down");
+        JButton moveUpButton = new JButton(" Up ");
+        JButton moveDownButton = new JButton("Down");
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0; 
+        panel.add(addButton,gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0; 
+        panel.add(deleteButton,gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 0;         
+        panel.add(completeButton,gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.gridy = 0;         
+        panel.add(moveUpButton,gbc);
+        
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 24;
+        gbc.gridy = 0;         
+        panel.add(moveDownButton,gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 2; 
+        panel.add(todoList,gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(newItemField,gbc);
+
+        
+
+
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -43,7 +83,6 @@ public class TodoUI {
                 }
             }
         });
-
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,7 +92,6 @@ public class TodoUI {
                 }
             }
         });
-
         completeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,7 +103,6 @@ public class TodoUI {
                 }
             }
         });
-
         moveUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +115,6 @@ public class TodoUI {
                 }
             }
         });
-
         moveDownButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,15 +128,10 @@ public class TodoUI {
             }
         });
 
-        panel.add(newItemField);
-        panel.add(addButton);
-        panel.add(todoList);
-        panel.add(deleteButton);
-        panel.add(completeButton);
-        panel.add(moveUpButton);
-        panel.add(moveDownButton);
-
+        frame.setSize(800, 300);
+        frame.add(panel);
         frame.setVisible(true);
+
     }
 
     static class TodoItem {
